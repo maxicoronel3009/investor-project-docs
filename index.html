@@ -42,7 +42,7 @@
       <div class="stats" aria-label="Indicadores del proyecto">
         <div class="stat"><strong>4</strong><span>Agentes especializados</span></div>
         <div class="stat"><strong>2</strong><span>Repositorios privados</span></div>
-        <div class="stat"><strong>21</strong><span>Tests validados en MCP (base integrada)</span></div>
+        <div class="stat"><strong>26</strong><span>Tests validados en MCP (base integrada)</span></div>
         <div class="stat"><strong>IOL</strong><span>Cotizaciones REST comprobadas</span></div>
       </div>
     </div>
@@ -92,8 +92,8 @@
       <p class="sub">Estado documentado del MVP: lo validado se distingue de lo que todavía necesita pruebas o desarrollo.</p>
       <div class="cols-2">
         <article class="card"><span class="pill">Validado</span><h3>Harness multiagente</h3><ul class="checklist"><li>Orquestador e instrucciones en <code>AGENTS.md</code></li><li>Cuatro roles y skills canónicas</li><li>Generador de roles para Codex</li><li>2 tests del harness aprobados</li><li>Codex reportó delegación entre especialistas</li></ul></article>
-        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>21 tests aprobados en la versión integrada</li></ul></article>
-        <article class="card"><span class="pill pending">Pendiente de validación real</span><h3>Histórico diario OHLCV</h3><p>Se desarrolló <code>get_price_history</code> en un Pull Request, con pruebas simuladas. Aún falta comprobar los tests locales y una consulta real del histórico antes de integrarlo.</p></article>
+        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>26 tests aprobados en la versión integrada</li></ul></article>
+        <article class="card"><span class="pill">Validado e integrado</span><h3>Histórico diario OHLCV</h3><p><code>get_price_history</code> consulta apertura, máximo, mínimo, cierre y volumen por fecha desde IOL. Se validó con una consulta real de GGAL y el PR #4 ya está integrado en <code>main</code>. Moneda y ajustes corporativos de las barras siguen sin confirmarse.</p></article>
         <article class="card"><span class="pill pending">En planificación</span><h3>Cartera real y automatizaciones</h3><p>Importación de movimientos de Inviu, reconciliación de posiciones, investigación activa, mejores datos de ON y alertas por Telegram. La cartera del MVP sigue siendo ficticia.</p></article>
       </div>
     </div></section>
@@ -110,7 +110,7 @@
       <h2>Hoja de ruta</h2>
       <p class="sub">Una evolución por etapas, priorizando datos confiables y controles antes de automatizar análisis complejos.</p>
       <div class="roadmap">
-        <article><div><h3>Validar históricos IOL</h3><p>Confirmar series diarias reales, fechas, unidades y comportamiento de la API.</p></div></article>
+        <article><div><h3>Comparar múltiples instrumentos</h3><p>Ampliar consultas y análisis de tendencias entre acciones, CEDEARs y bonos, verificando monedas y unidades.</p></div></article>
         <article><div><h3>Ampliar datos de mercado</h3><p>Consultas de múltiples activos, contexto fundamental y fuentes complementarias.</p></div></article>
         <article><div><h3>Integrar movimientos de Inviu</h3><p>Adaptador de archivos, preview, conciliación y persistencia privada.</p></div></article>
         <article><div><h3>Conectar cartera real</h3><p>Tenencias validadas, costos, monedas y análisis de concentración.</p></div></article>
