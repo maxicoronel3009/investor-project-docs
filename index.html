@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1220">
+  <meta name="description" content="Investor AI: plataforma multiagente para análisis financiero, investigación de inversiones y seguimiento de oportunidades de mercado.">
+  <title>Investor AI — Arquitectura, avances y hoja de ruta</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080e1b;--panel:#111c2d;--panel2:#162438;--ink:#eff5ff;--muted:#a9bbd4;--line:#2b3d54;--cyan:#64def0;--green:#81e4b1;--gold:#ffcf7b}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse 80% 38% at 85% -5%,#163757 0%,transparent 70%),var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+    a{color:var(--cyan);text-underline-offset:3px}a:hover{color:#a4f3fc}
+    .wrap{width:min(1100px,calc(100% - 40px));margin:auto}.topbar{position:sticky;top:0;z-index:10;backdrop-filter:blur(16px);background:rgba(8,14,27,.85);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}.brand{display:flex;align-items:center;gap:11px;color:var(--ink);font-size:1.13rem;font-weight:800;letter-spacing:.04em;text-decoration:none}.brandmark{display:grid;place-items:center;width:37px;height:37px;border-radius:11px;background:linear-gradient(135deg,#2579a5,#67dcc1);color:#081521;font-size:22px}
+    .menu{display:flex;flex-wrap:wrap;gap:19px;font-size:.86rem}.menu a{color:var(--muted);text-decoration:none}.menu a:hover{color:var(--ink)}
+    .hero{padding:94px 0 65px;max-width:840px}.eyebrow{color:var(--cyan);font-weight:750;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase}.hero h1{font-size:clamp(2.7rem,7.2vw,5.25rem);line-height:1.08;letter-spacing:-.065em;margin:20px 0 26px}.gradient{background:linear-gradient(100deg,#75daf4 5%,#91e9b5 80%);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:1.18rem;color:var(--muted);max-width:720px;margin-bottom:32px}.buttons{display:flex;flex-wrap:wrap;gap:13px}.btn{border:1px solid #3b7894;background:#123d55;color:#e6f8ff;border-radius:11px;padding:11px 18px;font-weight:700;text-decoration:none;font-size:.9rem}.btn.secondary{background:transparent;border-color:var(--line);color:var(--ink)}.btn:hover{background:#1a506e;color:white}
+    section{padding:38px 0 54px;scroll-margin-top:80px}h2{font-size:clamp(1.75rem,4vw,2.35rem);letter-spacing:-.04em;line-height:1.2;margin:0 0 12px}h3{font-size:1.05rem;margin:0 0 8px}.sub{color:var(--muted);max-width:740px;margin:0 0 28px}
+    .stats,.cols-2,.cols-3,.cols-4{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:8px 0 55px}.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.card,.stat,.diagram-box{background:linear-gradient(180deg,rgba(24,40,61,.88),rgba(15,26,43,.98));border:1px solid var(--line);border-radius:16px;padding:22px}.card p,.card li{color:var(--muted);font-size:.94rem}.card p{margin:0}.stat strong{font-size:1.85rem;line-height:1;display:block;color:var(--cyan)}.stat span{display:block;color:var(--muted);font-size:.81rem;margin-top:10px}.pill{display:inline-flex;font-size:.71rem;font-weight:700;border:1px solid #326359;background:#12332e;color:var(--green);border-radius:999px;padding:3px 10px;margin-bottom:14px}.pill.pending{border-color:#725c39;background:#332715;color:var(--gold)}.num{display:inline-grid;place-items:center;width:30px;height:30px;border:1px solid #447b91;background:#16394a;border-radius:9px;color:var(--cyan);font-weight:800;font-size:.84rem;margin-bottom:12px}
+    .diagram{display:grid;gap:11px;max-width:900px;margin:auto;text-align:center}.diagram-box strong{display:block}.diagram-box span{color:var(--muted);font-size:.86rem}.diagram-box.focus{border-color:#4093a6;background:#123044}.arrow{color:var(--cyan);font-size:1.3rem;line-height:1;text-align:center}.diagram .cols-4 .diagram-box{padding:17px 9px}.diagram .cols-4 strong{font-size:.86rem}
+    ul{padding-left:20px}li{margin-bottom:8px}.checklist{margin:0;list-style:none;padding:0}.checklist li{padding-left:29px;position:relative}.checklist li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}.roadmap{counter-reset:step;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.roadmap article{display:flex;gap:14px;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.roadmap article:before{counter-increment:step;content:counter(step,decimal-leading-zero);color:var(--cyan);font-weight:800;font-size:1.1rem}.roadmap h3{margin:0 0 4px}.roadmap p{color:var(--muted);font-size:.87rem;margin:0}
+    .notice{padding:20px 23px;border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:12px;background:var(--panel);color:var(--muted)}.notice strong{color:var(--ink)}.footer{border-top:1px solid var(--line);padding:28px 0 55px;color:var(--muted);font-size:.85rem}.footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}code{color:#c5e3ff;background:#182b40;padding:2px 5px;border-radius:4px}small{color:var(--muted)}:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+    @media(max-width:800px){.stats,.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}.cols-3{grid-template-columns:1fr 1fr}.menu{gap:11px}.hero{padding-top:68px}}
+    @media(max-width:570px){.wrap{width:min(100% - 30px,1100px)}.nav{padding:12px 0;align-items:flex-start;flex-direction:column}.menu{font-size:.78rem;gap:12px}.stats,.cols-2,.cols-3,.roadmap{grid-template-columns:1fr}.hero{padding:55px 0 38px}.hero h1{font-size:2.75rem}.cols-4 .diagram-box strong{font-size:.75rem}.card,.stat,.diagram-box{padding:18px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#inicio" aria-label="Investor AI, volver al inicio"><span class="brandmark" aria-hidden="true">✧</span> INVESTOR AI</a>
+      <nav class="menu" aria-label="Secciones"><a href="#arquitectura">Arquitectura</a><a href="#agentes">Agentes</a><a href="#avances">Avances</a><a href="#roadmap">Roadmap</a></nav>
+    </div>
+  </header>
+  <main id="inicio">
+    <div class="wrap">
+      <div class="hero">
+        <div class="eyebrow">Proyecto personal · Inteligencia artificial + finanzas</div>
+        <h1>Un equipo de agentes para <span class="gradient">investigar mejor.</span></h1>
+        <p class="lead">Investor AI es una plataforma multiagente en desarrollo para analizar inversiones, investigar mercados, comparar oportunidades y revisar riesgos con información rastreable.</p>
+        <div class="buttons"><a class="btn" href="#arquitectura">Explorar el proyecto ↓</a><a class="btn secondary" href="#avances">Ver estado actual</a></div>
+      </div>
+      <div class="stats" aria-label="Indicadores del proyecto">
+        <div class="stat"><strong>4</strong><span>Agentes especializados</span></div>
+        <div class="stat"><strong>2</strong><span>Repositorios privados</span></div>
+        <div class="stat"><strong>21</strong><span>Tests validados en MCP (base integrada)</span></div>
+        <div class="stat"><strong>IOL</strong><span>Cotizaciones REST comprobadas</span></div>
+      </div>
+    </div>
+    <section id="objetivo"><div class="wrap">
+      <h2>¿Qué queremos construir?</h2>
+      <p class="sub">Un asistente financiero personal que reúna investigación de mercados, análisis de cartera y controles de calidad en un flujo comprensible. Las decisiones de inversión siguen siendo humanas.</p>
+      <div class="cols-3">
+        <article class="card"><span class="num">01</span><h3>Investigar</h3><p>Consultar información verificable sobre acciones, CEDEARs, ETFs, bonos y obligaciones negociables, incluso fuera de la cartera.</p></article>
+        <article class="card"><span class="num">02</span><h3>Comparar</h3><p>Evaluar alternativas, costos, escenarios de inversión y posibles arbitrajes, sin prometer resultados.</p></article>
+        <article class="card"><span class="num">03</span><h3>Revisar</h3><p>Contrastar cifras, monedas, fechas, supuestos y riesgos antes de emitir un informe consolidado.</p></article>
+      </div>
+    </div></section>
+    <section id="arquitectura"><div class="wrap">
+      <h2>Una arquitectura modular</h2>
+      <p class="sub">Separamos el razonamiento de los agentes de las herramientas financieras. Así podemos cambiar de asistente de IA sin reescribir toda la lógica de datos.</p>
+      <div class="diagram" role="img" aria-label="Usuario mediante Codex, orquestador investor-agent y sus cuatro especialistas; conexión MCP a investor-mcp, que consulta IOL y SQLite; Inviu es futuro">
+        <div class="diagram-box"><strong>Usuario + Codex en VS Code</strong><span>Solicitudes y consultas de inversión</span></div>
+        <div class="arrow" aria-hidden="true">↓</div>
+        <div class="diagram-box focus"><strong>investor-agent · Orquestador</strong><span>Instrucciones, coordinación, reglas y consolidación de respuestas</span></div>
+        <div class="cols-4">
+          <div class="diagram-box"><strong>Investigador</strong><span>Mercados</span></div>
+          <div class="diagram-box"><strong>Analista de cartera</strong><span>Posiciones</span></div>
+          <div class="diagram-box"><strong>Arbitrajes</strong><span>Alternativas</span></div>
+          <div class="diagram-box"><strong>Revisor</strong><span>Riesgos</span></div>
+        </div>
+        <div class="arrow" aria-hidden="true">↕</div>
+        <div class="diagram-box focus"><strong>investor-mcp · Herramientas financieras</strong><span>Node.js · Cálculos · Validaciones · MCP local</span></div>
+        <div class="cols-3">
+          <div class="diagram-box"><strong>API IOL</strong><span>Cotizaciones reales</span></div>
+          <div class="diagram-box"><strong>SQLite</strong><span>Ledger local</span></div>
+          <div class="diagram-box"><strong>Inviu</strong><span>Importador futuro</span></div>
+        </div>
+      </div>
+    </div></section>
+    <section id="agentes"><div class="wrap">
+      <h2>Especialistas con responsabilidades claras</h2>
+      <p class="sub">El orquestador define qué necesita cada tarea. Los especialistas aportan hallazgos y el revisor comprueba que las conclusiones tengan sustento.</p>
+      <div class="cols-2">
+        <article class="card"><h3>🔎 Investigador de mercado</h3><p>Busca información de instrumentos, empresas y mercados. Distingue hechos, estimaciones y datos sin confirmar.</p></article>
+        <article class="card"><h3>📊 Analista de cartera</h3><p>Consulta herramientas de posiciones y movimientos, identifica concentración y explica limitaciones de los datos.</p></article>
+        <article class="card"><h3>🔁 Especialista en arbitrajes</h3><p>Compara escenarios considerando costos, liquidez, moneda, plazos y riesgos. No envía órdenes bursátiles.</p></article>
+        <article class="card"><h3>🛡️ Revisor de riesgos</h3><p>Controla fuentes, cálculos, coherencia temporal, moneda y supuestos antes de presentar conclusiones.</p></article>
+      </div>
+    </div></section>
+    <section id="avances"><div class="wrap">
+      <h2>Qué está funcionando hoy</h2>
+      <p class="sub">Estado documentado del MVP: lo validado se distingue de lo que todavía necesita pruebas o desarrollo.</p>
+      <div class="cols-2">
+        <article class="card"><span class="pill">Validado</span><h3>Harness multiagente</h3><ul class="checklist"><li>Orquestador e instrucciones en <code>AGENTS.md</code></li><li>Cuatro roles y skills canónicas</li><li>Generador de roles para Codex</li><li>2 tests del harness aprobados</li><li>Codex reportó delegación entre especialistas</li></ul></article>
+        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>21 tests aprobados en la versión integrada</li></ul></article>
+        <article class="card"><span class="pill pending">Pendiente de validación real</span><h3>Histórico diario OHLCV</h3><p>Se desarrolló <code>get_price_history</code> en un Pull Request, con pruebas simuladas. Aún falta comprobar los tests locales y una consulta real del histórico antes de integrarlo.</p></article>
+        <article class="card"><span class="pill pending">En planificación</span><h3>Cartera real y automatizaciones</h3><p>Importación de movimientos de Inviu, reconciliación de posiciones, investigación activa, mejores datos de ON y alertas por Telegram. La cartera del MVP sigue siendo ficticia.</p></article>
+      </div>
+    </div></section>
+    <section id="tecnologias"><div class="wrap">
+      <h2>Tecnologías y principios</h2>
+      <p class="sub">Un sistema local, extensible y diseñado para minimizar dependencias innecesarias.</p>
+      <div class="cols-3">
+        <article class="card"><h3>🧩 JavaScript / Node.js</h3><p>Servidor MCP, adaptadores REST, pruebas y lógica financiera independiente del modelo de IA.</p></article>
+        <article class="card"><h3>🗃️ SQLite local</h3><p>Persistencia de movimientos sin compartir una base de datos financiera en repositorios públicos.</p></article>
+        <article class="card"><h3>🤖 Codex hoy; otros mañana</h3><p>Definiciones canónicas de agentes y reglas para permitir adaptadores a distintos clientes y modelos.</p></article>
+      </div>
+    </div></section>
+    <section id="roadmap"><div class="wrap">
+      <h2>Hoja de ruta</h2>
+      <p class="sub">Una evolución por etapas, priorizando datos confiables y controles antes de automatizar análisis complejos.</p>
+      <div class="roadmap">
+        <article><div><h3>Validar históricos IOL</h3><p>Confirmar series diarias reales, fechas, unidades y comportamiento de la API.</p></div></article>
+        <article><div><h3>Ampliar datos de mercado</h3><p>Consultas de múltiples activos, contexto fundamental y fuentes complementarias.</p></div></article>
+        <article><div><h3>Integrar movimientos de Inviu</h3><p>Adaptador de archivos, preview, conciliación y persistencia privada.</p></div></article>
+        <article><div><h3>Conectar cartera real</h3><p>Tenencias validadas, costos, monedas y análisis de concentración.</p></div></article>
+        <article><div><h3>Evaluar oportunidades y ON</h3><p>Escenarios con cupones, amortización, liquidez, spreads y riesgo emisor.</p></div></article>
+        <article><div><h3>Alertas por Telegram</h3><p>Notificaciones y consultas locales con controles explícitos y decisión humana.</p></div></article>
+      </div>
+    </div></section>
+    <section id="seguridad"><div class="wrap">
+      <h2>Seguridad por diseño</h2>
+      <div class="notice"><strong>La plataforma no ejecuta órdenes de compra ni venta.</strong> Las credenciales de proveedores se guardan exclusivamente en archivos locales ignorados por Git, y los tokens no se incluyen en esta documentación. El uso de herramientas REST está restringido a consultas, aunque el token del broker puede tener permisos más amplios fuera del programa. Los datos financieros reales, bases SQLite y documentos privados no se publican.</div>
+    </div></section>
+  </main>
+  <footer class="footer"><div class="wrap"><span>© Investor AI · Documentación del proyecto</span><span>Investigación asistida por IA · Sin operaciones automáticas · Información no constituye asesoramiento financiero</span></div></footer>
+</body>
+</html>
