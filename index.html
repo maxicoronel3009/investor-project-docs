@@ -42,7 +42,7 @@
       <div class="stats" aria-label="Indicadores del proyecto">
         <div class="stat"><strong>4</strong><span>Agentes especializados</span></div>
         <div class="stat"><strong>2</strong><span>Repositorios privados</span></div>
-        <div class="stat"><strong>63</strong><span>Tests MCP validados en main</span></div>
+        <div class="stat"><strong>67</strong><span>Tests MCP validados en main</span></div>
         <div class="stat"><strong>30</strong><span>Observaciones de mercado en SQLite local</span></div>
       </div>
     </div>
@@ -92,11 +92,12 @@
       <p class="sub">Actualizado al 18/11/2026. Lo validado en la instalación local se distingue de las ramas todavía pendientes de pruebas o integración.</p>
       <div class="cols-2">
         <article class="card"><span class="pill">Validado</span><h3>Harness multiagente</h3><ul class="checklist"><li>Orquestador e instrucciones en <code>AGENTS.md</code></li><li>Cuatro roles y skills canónicas</li><li>Generador de roles para Codex</li><li>2 tests del harness aprobados</li><li>Codex reportó delegación entre especialistas</li></ul></article>
-        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>63 tests aprobados en la versión integrada</li></ul></article>
+        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>67 tests aprobados en la versión integrada</li></ul></article>
         <article class="card"><span class="pill">Validado e integrado</span><h3>Histórico diario OHLCV</h3><p><code>get_price_history</code> consulta apertura, máximo, mínimo, cierre y volumen por fecha desde IOL. Se validó con una consulta real de GGAL y el PR #4 ya está integrado en <code>main</code>. Moneda y ajustes corporativos de las barras siguen sin confirmarse.</p></article>
         <article class="card"><span class="pill">Validado en local</span><h3>Persistencia de cotizaciones en SQLite</h3><p>30 barras OHLCV históricas importadas de los CSV de GGAL, PAMP y AAPL (10 fechas por activo, 02–16/11/2026). Codex leyó cobertura y precios con 6 llamadas MCP exitosas sin volver a consultar fuentes externas. Los registros no prueban negociación ni autenticidad bursátil de los precios.</p></article>
         <article class="card"><span class="pill">Validado</span><h3>Comparación y control de calidad</h3><p>Comparador para 2–5 activos, informes JSON auditables con hashes y detección de volumen cero y posibles precios arrastrados. Un análisis multiagente comprobó cálculos y consistencia de los CSV; la fuente original no fue verificada independientemente.</p></article>
-        <article class="card"><span class="pill pending">PR #13 en validación</span><h3>Comparación directa desde SQLite</h3><p>Nuevo punto de entrada MCP para comparar activos almacenados sin volver a abrir CSV ni descargar precios. Pruebas locales pendientes; todavía no está integrado en main.</p></article>
+        <article class="card"><span class="pill">Validado e integrado</span><h3>Comparación directa desde SQLite</h3><p>PR #13 integrado en main con 67 tests aprobados. Codex comparó GGAL, PAMP y AAPL exclusivamente con la herramienta MCP, sin descargar datos ni leer archivos CSV o JSON; se conservaron las alertas de volumen cero.</p></article>
+        <article class="card"><span class="pill pending">PR #14 pendiente de pruebas</span><h3>Planificación de datos faltantes</h3><p>Nueva herramienta MCP para identificar fechas de lunes a viernes no almacenadas. Son candidatos a revisar, no jornadas bursátiles verificadas. La carga automática desde una fuente autorizada sigue pendiente.</p></article>
         <article class="card"><span class="pill pending">En planificación</span><h3>Cartera real y automatizaciones</h3><p>Importación de movimientos de Inviu, reconciliación de posiciones, investigación activa, mejores datos de ON y alertas por Telegram. La cartera del MVP sigue siendo ficticia.</p></article>
       </div>
     </div></section>
@@ -113,8 +114,8 @@
       <h2>Hoja de ruta</h2>
       <p class="sub">Una evolución por etapas, priorizando datos confiables y controles antes de automatizar análisis complejos.</p>
       <div class="roadmap">
-        <article><div><h3>Comparación desde SQLite (PR #13)</h3><p>Conectar el comparador al histórico almacenado, sin consultas externas ni archivos intermedios. Desarrollo propuesto pendiente de validación local.</p></div></article>
-        <article><div><h3>Actualización incremental de históricos</h3><p>Obtener exclusivamente fechas faltantes desde una fuente autorizada, validar datos y registrar correcciones sin sobrescribir silenciosamente.</p></div></article>
+        <article><div><h3>Planificación incremental (PR #14)</h3><p>Detectar días hábiles candidatos sin registros en SQLite. En desarrollo: no equivale a verificar ruedas bursátiles y no descarga precios.</p></div></article>
+        <article><div><h3>Ingesta automatizada desde fuente autorizada</h3><p>Etapa posterior: obtener nuevos datos diarios desde un proveedor autorizado, validarlos y anexarlos sin sobrescribir cotizaciones anteriores.</p></div></article>
         <article><div><h3>Integrar movimientos de Inviu</h3><p>Adaptador de archivos, preview, conciliación y persistencia privada.</p></div></article>
         <article><div><h3>Conectar cartera real</h3><p>Tenencias validadas, costos, monedas y análisis de concentración.</p></div></article>
         <article><div><h3>Evaluar oportunidades y ON</h3><p>Escenarios con cupones, amortización, liquidez, spreads y riesgo emisor.</p></div></article>
