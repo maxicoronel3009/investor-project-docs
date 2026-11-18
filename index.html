@@ -42,8 +42,8 @@
       <div class="stats" aria-label="Indicadores del proyecto">
         <div class="stat"><strong>4</strong><span>Agentes especializados</span></div>
         <div class="stat"><strong>2</strong><span>Repositorios privados</span></div>
-        <div class="stat"><strong>26</strong><span>Tests validados en MCP (base integrada)</span></div>
-        <div class="stat"><strong>IOL</strong><span>Cotizaciones REST comprobadas</span></div>
+        <div class="stat"><strong>63</strong><span>Tests MCP validados en main</span></div>
+        <div class="stat"><strong>30</strong><span>Observaciones de mercado en SQLite local</span></div>
       </div>
     </div>
     <section id="objetivo"><div class="wrap">
@@ -72,7 +72,7 @@
         <div class="diagram-box focus"><strong>investor-mcp · Herramientas financieras</strong><span>Node.js · Cálculos · Validaciones · MCP local</span></div>
         <div class="cols-3">
           <div class="diagram-box"><strong>API IOL</strong><span>Cotizaciones reales</span></div>
-          <div class="diagram-box"><strong>SQLite</strong><span>Ledger local</span></div>
+          <div class="diagram-box"><strong>SQLite</strong><span>Históricos diarios persistentes y ledger separado</span></div>
           <div class="diagram-box"><strong>Inviu</strong><span>Importador futuro</span></div>
         </div>
       </div>
@@ -89,11 +89,14 @@
     </div></section>
     <section id="avances"><div class="wrap">
       <h2>Qué está funcionando hoy</h2>
-      <p class="sub">Estado documentado del MVP: lo validado se distingue de lo que todavía necesita pruebas o desarrollo.</p>
+      <p class="sub">Actualizado al 18/11/2026. Lo validado en la instalación local se distingue de las ramas todavía pendientes de pruebas o integración.</p>
       <div class="cols-2">
         <article class="card"><span class="pill">Validado</span><h3>Harness multiagente</h3><ul class="checklist"><li>Orquestador e instrucciones en <code>AGENTS.md</code></li><li>Cuatro roles y skills canónicas</li><li>Generador de roles para Codex</li><li>2 tests del harness aprobados</li><li>Codex reportó delegación entre especialistas</li></ul></article>
-        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>26 tests aprobados en la versión integrada</li></ul></article>
+        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>63 tests aprobados en la versión integrada</li></ul></article>
         <article class="card"><span class="pill">Validado e integrado</span><h3>Histórico diario OHLCV</h3><p><code>get_price_history</code> consulta apertura, máximo, mínimo, cierre y volumen por fecha desde IOL. Se validó con una consulta real de GGAL y el PR #4 ya está integrado en <code>main</code>. Moneda y ajustes corporativos de las barras siguen sin confirmarse.</p></article>
+        <article class="card"><span class="pill">Validado en local</span><h3>Persistencia de cotizaciones en SQLite</h3><p>30 barras OHLCV históricas importadas de los CSV de GGAL, PAMP y AAPL (10 fechas por activo, 02–16/11/2026). Codex leyó cobertura y precios con 6 llamadas MCP exitosas sin volver a consultar fuentes externas. Los registros no prueban negociación ni autenticidad bursátil de los precios.</p></article>
+        <article class="card"><span class="pill">Validado</span><h3>Comparación y control de calidad</h3><p>Comparador para 2–5 activos, informes JSON auditables con hashes y detección de volumen cero y posibles precios arrastrados. Un análisis multiagente comprobó cálculos y consistencia de los CSV; la fuente original no fue verificada independientemente.</p></article>
+        <article class="card"><span class="pill pending">PR #13 en validación</span><h3>Comparación directa desde SQLite</h3><p>Nuevo punto de entrada MCP para comparar activos almacenados sin volver a abrir CSV ni descargar precios. Pruebas locales pendientes; todavía no está integrado en main.</p></article>
         <article class="card"><span class="pill pending">En planificación</span><h3>Cartera real y automatizaciones</h3><p>Importación de movimientos de Inviu, reconciliación de posiciones, investigación activa, mejores datos de ON y alertas por Telegram. La cartera del MVP sigue siendo ficticia.</p></article>
       </div>
     </div></section>
@@ -102,7 +105,7 @@
       <p class="sub">Un sistema local, extensible y diseñado para minimizar dependencias innecesarias.</p>
       <div class="cols-3">
         <article class="card"><h3>🧩 JavaScript / Node.js</h3><p>Servidor MCP, adaptadores REST, pruebas y lógica financiera independiente del modelo de IA.</p></article>
-        <article class="card"><h3>🗃️ SQLite local</h3><p>Persistencia de movimientos sin compartir una base de datos financiera en repositorios públicos.</p></article>
+        <article class="card"><h3>🗃️ SQLite local</h3><p>Persistencia de históricos OHLCV de mercado y tablas separadas para los movimientos personales; datos privados fuera de Git.</p></article>
         <article class="card"><h3>🤖 Codex hoy; otros mañana</h3><p>Definiciones canónicas de agentes y reglas para permitir adaptadores a distintos clientes y modelos.</p></article>
       </div>
     </div></section>
@@ -110,8 +113,8 @@
       <h2>Hoja de ruta</h2>
       <p class="sub">Una evolución por etapas, priorizando datos confiables y controles antes de automatizar análisis complejos.</p>
       <div class="roadmap">
-        <article><div><h3>Comparar múltiples instrumentos</h3><p>Ampliar consultas y análisis de tendencias entre acciones, CEDEARs y bonos, verificando monedas y unidades.</p></div></article>
-        <article><div><h3>Ampliar datos de mercado</h3><p>Consultas de múltiples activos, contexto fundamental y fuentes complementarias.</p></div></article>
+        <article><div><h3>Comparación desde SQLite (PR #13)</h3><p>Conectar el comparador al histórico almacenado, sin consultas externas ni archivos intermedios. Desarrollo propuesto pendiente de validación local.</p></div></article>
+        <article><div><h3>Actualización incremental de históricos</h3><p>Obtener exclusivamente fechas faltantes desde una fuente autorizada, validar datos y registrar correcciones sin sobrescribir silenciosamente.</p></div></article>
         <article><div><h3>Integrar movimientos de Inviu</h3><p>Adaptador de archivos, preview, conciliación y persistencia privada.</p></div></article>
         <article><div><h3>Conectar cartera real</h3><p>Tenencias validadas, costos, monedas y análisis de concentración.</p></div></article>
         <article><div><h3>Evaluar oportunidades y ON</h3><p>Escenarios con cupones, amortización, liquidez, spreads y riesgo emisor.</p></div></article>
@@ -123,6 +126,6 @@
       <div class="notice"><strong>La plataforma no ejecuta órdenes de compra ni venta.</strong> Las credenciales de proveedores se guardan exclusivamente en archivos locales ignorados por Git, y los tokens no se incluyen en esta documentación. El uso de herramientas REST está restringido a consultas, aunque el token del broker puede tener permisos más amplios fuera del programa. Los datos financieros reales, bases SQLite y documentos privados no se publican.</div>
     </div></section>
   </main>
-  <footer class="footer"><div class="wrap"><span>© Investor AI · Documentación del proyecto</span><span>Investigación asistida por IA · Sin operaciones automáticas · Información no constituye asesoramiento financiero</span></div></footer>
+  <footer class="footer"><div class="wrap"><span>© Investor AI · Estado actualizado: 18/11/2026</span><span>Investigación asistida por IA · Sin operaciones automáticas · Información no constituye asesoramiento financiero</span></div></footer>
 </body>
 </html>
