@@ -42,7 +42,7 @@
       <div class="stats" aria-label="Indicadores del proyecto">
         <div class="stat"><strong>4</strong><span>Agentes especializados</span></div>
         <div class="stat"><strong>2</strong><span>Repositorios privados</span></div>
-        <div class="stat"><strong>77</strong><span>Tests MCP validados en main</span></div>
+        <div class="stat"><strong>102</strong><span>Tests MCP validados en main</span></div>
         <div class="stat"><strong>30</strong><span>Observaciones de mercado en SQLite local</span></div>
       </div>
     </div>
@@ -92,7 +92,7 @@
       <p class="sub">Actualizado al 20/11/2026. Lo validado en la instalación local se distingue de las ramas todavía pendientes de pruebas o integración.</p>
       <div class="cols-2">
         <article class="card"><span class="pill">Validado</span><h3>Harness multiagente</h3><ul class="checklist"><li>Orquestador e instrucciones en <code>AGENTS.md</code></li><li>Cuatro roles y skills canónicas</li><li>Generador de roles para Codex</li><li>2 tests del harness aprobados</li><li>Codex reportó delegación entre especialistas</li></ul></article>
-        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>77 tests aprobados en la versión integrada</li></ul></article>
+        <article class="card"><span class="pill">Validado</span><h3>Servidor MCP e IOL</h3><ul class="checklist"><li>Node.js + MCP por stdio</li><li>SQLite local y validación <code>preview_import</code></li><li><code>get_market_quote</code> con API REST de IOL</li><li>Cotizaciones reales probadas con GGAL, AAPL y AL30</li><li>102 tests aprobados en la versión integrada</li></ul></article>
         <article class="card"><span class="pill">Validado e integrado</span><h3>Histórico diario OHLCV</h3><p><code>get_price_history</code> consulta apertura, máximo, mínimo, cierre y volumen por fecha desde IOL. Se validó con una consulta real de GGAL y el PR #4 ya está integrado en <code>main</code>. Moneda y ajustes corporativos de las barras siguen sin confirmarse.</p></article>
         <article class="card"><span class="pill">Validado en local</span><h3>Persistencia de cotizaciones en SQLite</h3><p>30 barras OHLCV históricas importadas de los CSV de GGAL, PAMP y AAPL (10 fechas por activo, 02–16/11/2026). Codex leyó cobertura y precios con 6 llamadas MCP exitosas sin volver a consultar fuentes externas. Los registros no prueban negociación ni autenticidad bursátil de los precios.</p></article>
         <article class="card"><span class="pill">Validado</span><h3>Comparación y control de calidad</h3><p>Comparador para 2–5 activos, informes JSON auditables con hashes y detección de volumen cero y posibles precios arrastrados. Un análisis multiagente comprobó cálculos y consistencia de los CSV; la fuente original no fue verificada independientemente.</p></article>
@@ -100,7 +100,8 @@
         <article class="card"><span class="pill">Validado e integrado</span><h3>Planificación de datos faltantes</h3><p>PR #14 integrado en main y probado desde Codex: detecta lunes a viernes candidatos sin registros para GGAL, PAMP y AAPL. No verifica ruedas reales ni realiza descargas o escrituras.</p></article>
         <article class="card"><span class="pill">Validado e integrado</span><h3>Prevalidación de nuevos históricos</h3><p>PR #15 integrado con 77 tests aprobados. La ejecución real de <code>--dry-run</code> confirmó 30 barras coincidentes y cero conflictos sin escribir precios.</p></article>
         <article class="card"><span class="pill">Comprobación parcial</span><h3>Verificación Yahoo / IOL / BYMA</h3><p>Los cierres del 16/11/2026 de GGAL, PAMP y AAPL coinciden entre el piloto CSV y los históricos públicos de IOL. BYMA confirma que el 9 y 10 de noviembre no hubo actividad: el registro de volumen cero del día 10 no representa una rueda operada. Falta auditar el resto de barras y los permisos de uso.</p></article>
-        <article class="card"><span class="pill pending">PR #16 pendiente de pruebas</span><h3>Conciliación de proveedores</h3><p>Se está desarrollando una comparación offline de barras de dos fuentes, para identificar diferencias de OHLCV y fechas que existen en solo una de ellas. No habilita descargas automáticas.</p></article>
+        <article class="card"><span class="pill">Validado e integrado</span><h3>Diagnóstico IOL frente a SQLite</h3><p>PR #20 integrado y validado con 102 tests. Codex contrastó 9 fechas compartidas por activo: 11 coincidencias completas y 16 discrepancias entre GGAL, PAMP y AAPL. IOL todavía no informa moneda confirmada.</p></article>
+        <article class="card"><span class="pill pending">PR #21 pendiente de pruebas</span><h3>Métricas de discrepancias</h3><p>En desarrollo: diferencias absolutas y porcentuales de cierre, diferencias de volumen y alertas de barras sospechosas. Sólo diagnóstico, sin corregir precios ni habilitar importación automática.</p></article>
         <article class="card"><span class="pill pending">En planificación</span><h3>Cartera real y automatizaciones</h3><p>Importación de movimientos de Inviu, reconciliación de posiciones, investigación activa, mejores datos de ON y alertas por Telegram. La cartera del MVP sigue siendo ficticia.</p></article>
       </div>
     </div></section>
@@ -117,7 +118,7 @@
       <h2>Hoja de ruta</h2>
       <p class="sub">Una evolución por etapas, priorizando datos confiables y controles antes de automatizar análisis complejos.</p>
       <div class="roadmap">
-        <article><div><h3>Conciliación de proveedores (PR #16)</h3><p>Contrastar históricos de fuentes distintas antes de persistir nuevos precios. En validación; sin nuevas conexiones automáticas.</p></div></article>
+        <article><div><h3>Discrepancias entre fuentes (PR #21)</h3><p>Cuantificar diferencias de cierre y volumen, identificar barras sospechosas y preparar contraste externo antes de elegir un proveedor de referencia.</p></div></article>
         <article><div><h3>Ingesta automatizada desde fuente autorizada</h3><p>Etapa posterior: obtener nuevos datos diarios desde un proveedor autorizado, validarlos y anexarlos sin sobrescribir cotizaciones anteriores.</p></div></article>
         <article><div><h3>Integrar movimientos de Inviu</h3><p>Adaptador de archivos, preview, conciliación y persistencia privada.</p></div></article>
         <article><div><h3>Conectar cartera real</h3><p>Tenencias validadas, costos, monedas y análisis de concentración.</p></div></article>
