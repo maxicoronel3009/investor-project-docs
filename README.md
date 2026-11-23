@@ -21,6 +21,13 @@ URL prevista: https://maxicoronel3009.github.io/investor-project-docs/
 
 Los repositorios de código `investor-agent` e `investor-mcp` permanecen privados. Esta web **no contiene** credenciales, tokens, archivos de cartera, documentos de brokers ni código propietario.
 
+## Política de actualización
+
+- Actualizar este sitio al completar hitos funcionales del MCP o del orquestador (idealmente cada 2–3 PRs), sin publicar datos de cartera ni secretos.
+- Distinguir claramente funcionalidades integradas en `main`, PRs con CI aprobado pero pendientes de merge y funcionalidades planificadas.
+- Documentar limitaciones importantes: no hay ejecución automática de operaciones, las valoraciones no son garantías de rendimiento y los snapshots privados no implican sincronización en vivo.
+- Última revisión de avances: 23/11/2026 (MCP PR #31–36; #36 pendiente de merge al preparar esta actualización).
+
 ## Actualización
 
 Editá `index.html` para modificar el contenido del sitio. Las funcionalidades en desarrollo se presentan como tales, sin dar por finalizadas pruebas que aún no se ejecutaron.

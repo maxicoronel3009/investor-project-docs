@@ -42,8 +42,8 @@
       <div class="stats" aria-label="Indicadores del proyecto">
         <div class="stat"><strong>4</strong><span>Agentes especializados</span></div>
         <div class="stat"><strong>2</strong><span>Repositorios privados</span></div>
-        <div class="stat"><strong>163</strong><span>Tests MCP validados en main</span></div>
-        <div class="stat"><strong>30</strong><span>Observaciones de mercado en SQLite local</span></div>
+        <div class="stat"><strong>CI ✓</strong><span>Pruebas automáticas del MCP en GitHub Actions</span></div>
+        <div class="stat"><strong>36</strong><span>Último PR MCP documentado (pendiente de merge)</span></div>
       </div>
     </div>
     <section id="objetivo"><div class="wrap">
@@ -73,7 +73,7 @@
         <div class="cols-3">
           <div class="diagram-box"><strong>API IOL</strong><span>Cotizaciones reales</span></div>
           <div class="diagram-box"><strong>SQLite</strong><span>Históricos diarios persistentes y ledger separado</span></div>
-          <div class="diagram-box"><strong>Inviu</strong><span>Importador futuro</span></div>
+          <div class="diagram-box"><strong>Inviu</strong><span>Importación privada de snapshots disponible; carga real pendiente</span></div>
         </div>
       </div>
     </div></section>
@@ -111,8 +111,11 @@
         <article class="card"><span class="pill">Validado e integrado</span><h3>Snapshots Inviu versionados y consultas MCP</h3><p>PR #27 integrado y 163 tests aprobados en GitHub Actions. Importación privada mediante hash y confirmación explícita, historial inmutable y tres herramientas MCP de lectura. La vista previa real reconoció 29 registros y una fecha futura; la cartera real sigue sin importarse a SQLite.</p></article>
         <article class="card"><span class="pill">Validado e integrado</span><h3>Análisis de concentración Inviu</h3><p>Un solo PR funcional con top posiciones, HHI, concentración por categoría y moneda de cotización y alertas descriptivas configurables. Un comando local permite analizar dos Excel privados sin importarlos. GitHub Actions aprobó 177 tests con fixtures sintéticos. No mezcla monedas ni inventa exposición cambiaria, sectorial o crediticia.</p></article>
         <article class="card"><span class="pill">Validado e integrado</span><h3>Auditoría de valuaciones y precios de ON</h3><p>Control local y solo lectura sobre fechas de valuación, importes declarados frente a cálculos derivados y convenciones no confirmadas de precios por nominal o por 100 nominales. GitHub Actions aprobó 190 tests (13 nuevos). No hay correcciones automáticas, conversión de monedas ni importación de saldos personales.</p></article>
-        <article class="card"><span class="pill pending">PR #30: CI aprobado, pendiente de aceptación local</span><h3>Investigación fundamental y escenarios DCF</h3><p>Primer motor de valoración de acciones por escenarios bajista, base y alcista, con evidencias fechadas, condiciones de comparabilidad y cotización IOL opcional para la acción subyacente. GitHub Actions aprobó 208 pruebas (18 nuevas). Todavía no obtiene automáticamente balances; no equivale a recomendaciones ejecutables ni convierte CEDEARs sin ratio y FX confirmados.</p></article>
-        <article class="card"><span class="pill pending">En planificación</span><h3>Cartera real y automatizaciones</h3><p>Importación de movimientos de Inviu, reconciliación de posiciones, investigación activa, mejores datos de ON y alertas por Telegram. La cartera del MVP sigue siendo ficticia.</p></article>
+        <article class="card"><span class="pill">Validado e integrado</span><h3>Investigación fundamental y escenarios DCF</h3><p>Primer motor de valoración de acciones por escenarios bajista, base y alcista, con evidencias fechadas, condiciones de comparabilidad y cotización IOL opcional para la acción subyacente. GitHub Actions aprobó 208 pruebas (18 nuevas). Todavía no obtiene automáticamente balances; no equivale a recomendaciones ejecutables ni convierte CEDEARs sin ratio y FX confirmados.</p></article>
+        <article class="card"><span class="pill pending">En desarrollo</span><h3>Cartera real y automatizaciones</h3><p>Los snapshots privados de Inviu ya tienen lectura y screening de concentración; el puente del PR #36 está pendiente de merge. La carga efectiva de cartera privada, integración de IOL, valoración completa de ON y alertas por Telegram todavía requieren trabajo.</p></article>
+        <article class="card"><span class="pill">Integrado en main</span><h3>SEC Companyfacts y valoración auditada · PR #31–33</h3><p>Consulta de información pública SEC XBRL, cálculo de flujo de caja libre anual con períodos conciliados, puente DCF con revisión explícita y auditoría conservadora de efectivo, deuda y acciones. No habilita valoración automática sin reconciliación de deuda ni predice pisos y máximos.</p></article>
+        <article class="card"><span class="pill">Integrado en main</span><h3>Primer screening de oportunidades · PR #35</h3><p>Compara candidatos de acciones con valoraciones documentadas, identifica concentración por moneda y bloquea comparaciones no equivalentes entre CEDEARs, ON y acciones subyacentes. Es un filtro preliminar, no una recomendación de compra o venta.</p></article>
+        <article class="card"><span class="pill pending">PR #36: CI aprobado, pendiente de merge</span><h3>Puente entre cartera Inviu y oportunidades</h3><p>Conecta snapshots privados previamente importados en SQLite con el motor de screening, separa ARS y USD, excluye saldos de moneda y valuaciones ausentes, y rechaza fechas inconsistentes. No importa automáticamente la cartera real ni consulta cotizaciones en vivo.</p></article>
       </div>
     </div></section>
     <section id="tecnologias"><div class="wrap">
@@ -142,6 +145,6 @@
       <div class="notice"><strong>La plataforma no ejecuta órdenes de compra ni venta.</strong> Las credenciales de proveedores se guardan exclusivamente en archivos locales ignorados por Git, y los tokens no se incluyen en esta documentación. El uso de herramientas REST está restringido a consultas, aunque el token del broker puede tener permisos más amplios fuera del programa. Los datos financieros reales, bases SQLite y documentos privados no se publican.</div>
     </div></section>
   </main>
-  <footer class="footer"><div class="wrap"><span>© Investor AI · Estado actualizado: 18/11/2026</span><span>Investigación asistida por IA · Sin operaciones automáticas · Información no constituye asesoramiento financiero</span></div></footer>
+  <footer class="footer"><div class="wrap"><span>© Investor AI · Estado actualizado: 23/11/2026</span><span>Investigación asistida por IA · Sin operaciones automáticas · Información no constituye asesoramiento financiero</span></div></footer>
 </body>
 </html>
